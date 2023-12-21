@@ -1,0 +1,41 @@
+`timescale 1ns/1ps
+
+module test;
+reg clk,rst;
+wire [6:0]out1,out2,out3;
+wire Lock;
+wire [4:0]month,date,temp;
+reg [6:0]i1s,i2min,i3h;
+
+initial begin
+#0.2 clk=0;
+rst=1;
+
+#1.6
+rst=0;
+i1s=20;
+i2min=10;
+i3h=20;
+end
+
+
+always begin
+
+#0.2 clk = ~clk;
+   
+end
+
+BCD8bit B(clk,out1,out2,out3,rst,Lock,i1s,i2min,i3h,month,date,temp);
+
+
+
+
+	initial begin
+		$fsdbDumpfile ( "abc.fsdb" ) ;
+		$fsdbDumpvars ;
+    #40000 $finish ;
+	end
+  
+
+
+endmodule
